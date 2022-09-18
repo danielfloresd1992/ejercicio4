@@ -1,0 +1,33 @@
+.productContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 4.5rem 0.5rem;
+    align-items: center;
+}
+.productContainer-items{
+    width: 80%;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.items-description{
+    text-align: left
+}
+.items-text{
+    color: #463434;
+    margin:.5rem;
+    padding: 0
+}
+.item-containerButton{
+    width: 100%;
+    width: 100%;
+    padding: 0.2rem;
+}
+.item-button{
+    background: #5da7ab;
+    color: #fff;
+    margin: 0.1rem 0.5rem;
+    font-size: .8rem;
+}
