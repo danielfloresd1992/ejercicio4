@@ -7,6 +7,7 @@ import { Modal } from './assets/components/boxModal/Modal.jsx';
 import axios from 'axios';
 
 function App() {
+    const URL =  'http://144.126.218.162:9000/';
 
     let [ users, setUsers ] = useState([]);
     let [ userSelect, setUserSelect ] = useState(null);
@@ -17,41 +18,54 @@ function App() {
     let [ text, setText ] =  useState('Este es el texto de la modal');
 
     useEffect(()=> {
-        axios.get('https://users-crud1.herokuapp.com/users/')
+        axios.get(`${URL}users/`)
         .then((result) => {
             setUsers([...result.data]);
-            showModal('Welcome', 'Uploaded Users.');
+            showModal('uploaded users', 'welcome to my crud.');
+        })
+        .catch((err) => {
+            showModal('Error', 'server error');
+            console.log(err)
         });
     },[]);
     const getUser = () => {
-        axios.get('https://users-crud1.herokuapp.com/users/')
+        axios.get(`${URL}users/`)
         .then((result) => {
             setUsers([...result.data]);
+        })
+        .catch(() => {
+            showModal('Error', 'server error');
         });
     }
     const addUser = (newProduct) => {
-        axios.post('https://users-crud1.herokuapp.com/users/', newProduct)
+        axios.post(`${URL}users/`, newProduct)
         .then(() => { 
             getUser();
             showModal('created user', 'User created successfully');
         })
-        .catch((error) => console.log(error.response));
+        .catch(() => {
+            showModal('Error', 'server error');
+        });
     }
     const deleteUser = (item) => {
-        axios.delete(`https://users-crud1.herokuapp.com/users/${item}/`)
+        axios.delete(`${URL}users/${item}/`)
         .then(() => {
             getUser();
             showModal('DUpdateeleted user', 'User deleted successfully');
         })
-        .catch((error) => console.log(error.response));
+        .catch(() => {
+            showModal('Error', 'server error');
+        });
     }
     const updateUser = (item) => {
-        axios.put(`https://users-crud1.herokuapp.com/users/${item.id}/`, item)
+        axios.put(`${URL}users/${item.id}/`, item)
         .then(result => {
             getUser();
             showModal('Updated user', 'Successfully edited user');
         })
-        .catch(err => console.log(err));
+        .catch(() => {
+            showModal('Error', 'server error');
+        });
     }
     const selectUser = item => setUserSelect(userSelect = item);
     const deSelectUser = () => setUserSelect(userSelect = null);
